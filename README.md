@@ -6,10 +6,6 @@
 * How does the Bot "listen" for right time?
 * ~~How does bot communicate with database?~~
 
-
-## TODO
-1. Read more about dependence injection
-
 ## Module Ideas
 * Schedule of events
 * Message reminders?
