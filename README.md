@@ -9,3 +9,10 @@
 
 ## TODO
 1. Read more about dependence injection
+
+## Module Ideas
+* Schedule of events
+* Message reminders?
+* Important links?
+* Whiteboarding questions?
+* Ticketing system
