@@ -1,8 +1,10 @@
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using HelloDiscord.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 
 namespace HelloDiscord
 {
@@ -31,13 +33,14 @@ namespace HelloDiscord
       var provider = services.BuildServiceProvider();     // Build the service provider
       provider.GetRequiredService<LoggingService>();      // Start the logging service
       provider.GetRequiredService<CommandHandler>();    // Start the command handler service
-
       await provider.GetRequiredService<StartupService>().StartAsync();       // Start the startup service
       await Task.Delay(-1);                               // Keep the program alive
     }
 
     private void ConfigureServices(IServiceCollection services)
     {
+      services.AddDbContext<HelloDiscordContext>(opt =>
+                opt.UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
       services.AddSingleton(new DiscordSocketClient(new DiscordSocketConfig
       {                                       // Add discord to the collection
         LogLevel = LogSeverity.Verbose,     // Tell the logger to give Verbose amount of info
